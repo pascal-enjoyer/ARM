@@ -43,7 +43,7 @@
    <widget class="QLabel" name="time_label">
     <property name="geometry">
      <rect>
-      <x>120</x>
+      <x>170</x>
       <y>30</y>
       <width>311</width>
       <height>33</height>
@@ -55,14 +55,14 @@
      </font>
     </property>
     <property name="text">
-     <string>12</string>
+     <string>время</string>
     </property>
    </widget>
    <widget class="QLabel" name="date_label">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>90</y>
+      <x>190</x>
+      <y>70</y>
       <width>171</width>
       <height>16</height>
      </rect>
@@ -79,10 +79,10 @@
    <widget class="QLabel" name="CaseGlTime">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>20</y>
-      <width>47</width>
-      <height>13</height>
+      <x>380</x>
+      <y>10</y>
+      <width>51</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="text">
@@ -93,9 +93,9 @@
     <property name="geometry">
      <rect>
       <x>420</x>
-      <y>20</y>
-      <width>47</width>
-      <height>13</height>
+      <y>10</y>
+      <width>81</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="text">
@@ -106,9 +106,9 @@
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>60</y>
+      <y>70</y>
       <width>381</width>
-      <height>140</height>
+      <height>171</height>
      </rect>
     </property>
     <property name="font">
@@ -120,6 +120,13 @@
      <string/>
     </property>
     <layout class="QFormLayout" name="formLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="CaseNumber">
+       <property name="text">
+        <string>Заказ №</string>
+       </property>
+      </widget>
+     </item>
      <item row="1" column="0">
       <widget class="QLabel" name="label_2">
        <property name="text">
@@ -141,6 +148,13 @@
        </property>
       </widget>
      </item>
+     <item row="2" column="1">
+      <widget class="QLabel" name="TimeLabelDyn">
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
      <item row="3" column="0">
       <widget class="QLabel" name="label">
        <property name="text">
@@ -155,22 +169,29 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
-      <widget class="QLabel" name="TimeLabelDyn">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="CaseNumber">
-       <property name="text">
-        <string>Заказ №</string>
-       </property>
-      </widget>
-     </item>
     </layout>
    </widget>
+   <widget class="QLabel" name="CountOfCompleteLabel">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>250</y>
+      <width>151</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>сколько из скольки выполнено</string>
+    </property>
+   </widget>
+   <zorder>CasegroupBox</zorder>
+   <zorder>pushButton</zorder>
+   <zorder>pushButton_2</zorder>
+   <zorder>time_label</zorder>
+   <zorder>date_label</zorder>
+   <zorder>CaseGlTime</zorder>
+   <zorder>CaseGlData</zorder>
+   <zorder>CountOfCompleteLabel</zorder>
   </widget>
  </widget>
  <resources/>

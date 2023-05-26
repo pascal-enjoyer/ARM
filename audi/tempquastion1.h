@@ -12,6 +12,7 @@ class TempQuastion1 : public QDialog
     Q_OBJECT
 
 public:
+    bool yes = 0;
     explicit TempQuastion1(QWidget *parent = nullptr);
     ~TempQuastion1();
 
@@ -19,6 +20,12 @@ private slots:
     void on_pushButton_clicked();
 
     void on_pushButton_2_clicked();
+
+    void on_No1pushButton_2_clicked();
+
+    void on_SendOtherpushButton_4_clicked();
+
+    void on_SendCheckspushButton_3_clicked();
 
     void on_pushButton_3_clicked();
 

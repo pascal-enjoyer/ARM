@@ -12,6 +12,7 @@ explicit Case(QObject *parent = nullptr);
 QString time_to_take;
 QString money;
 QString place;
+int count_of_complete;
 int Number = 0;
 void GenerateTime();
 void GenerateMoney();

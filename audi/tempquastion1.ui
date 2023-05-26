@@ -6,82 +6,428 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>576</width>
+    <height>331</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>70</x>
-     <y>70</y>
-     <width>261</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>У вас были проблемы при выполнении заказа?</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>100</x>
-     <y>110</y>
-     <width>221</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Продолжить выполнение заказов?</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>180</y>
-     <width>80</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>да</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_2">
-   <property name="geometry">
-    <rect>
-     <x>230</x>
-     <y>180</y>
-     <width>80</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>нет</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_3">
+  <widget class="QGroupBox" name="groupBox">
    <property name="enabled">
     <bool>true</bool>
    </property>
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>180</y>
-     <width>80</width>
-     <height>21</height>
+     <x>100</x>
+     <y>30</y>
+     <width>331</width>
+     <height>181</height>
     </rect>
    </property>
-   <property name="text">
-    <string>да</string>
+   <property name="title">
+    <string/>
    </property>
+   <widget class="QPushButton" name="No1pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>253</x>
+      <y>148</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Нет</string>
+    </property>
+    <property name="autoDefault">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="FirstQuastionlabel">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>40</y>
+      <width>237</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>У вас были проблемы при выполнении заказа?</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>150</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Да</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="checkgroupBox_2">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>20</y>
+     <width>431</width>
+     <height>261</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>210</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Другое</string>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_2">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>391</width>
+      <height>231</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QCheckBox" name="bankomatcheckBox_4">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>100</y>
+       <width>171</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Неисправность банкомата</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="CaputcheckBox_3">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>70</y>
+       <width>131</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Изменение маршрута</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="NotMoneycheckBox_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>40</y>
+       <width>161</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Получены не все деньги</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="CarcheckBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>130</y>
+       <width>131</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Сломалась машина</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="SendCheckspushButton_3">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>200</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Отправить</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="ChooseCheckBoxlabel_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>81</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Выберите:</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>10</y>
+      <width>191</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Опишите проблему:</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>30</y>
+      <width>371</width>
+      <height>71</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="SendOtherpushButton_4">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>210</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Отправить</string>
+    </property>
+   </widget>
+   <zorder>textEdit</zorder>
+   <zorder>groupBox_2</zorder>
+   <zorder>pushButton</zorder>
+   <zorder>label</zorder>
+   <zorder>SendOtherpushButton_4</zorder>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_3">
+   <property name="geometry">
+    <rect>
+     <x>99</x>
+     <y>39</y>
+     <width>331</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>311</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>ответ</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>140</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>продолжить</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>checkgroupBox_2</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>158</x>
+     <y>194</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>490</x>
+     <y>225</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>groupBox</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>173</x>
+     <y>190</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>239</x>
+     <y>172</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>groupBox_2</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>380</x>
+     <y>234</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>335</x>
+     <y>217</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>pushButton</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>420</x>
+     <y>237</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>420</x>
+     <y>237</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>SendOtherpushButton_4</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>434</x>
+     <y>235</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>274</x>
+     <y>236</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>textEdit</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>434</x>
+     <y>230</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>375</x>
+     <y>90</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>label</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>435</x>
+     <y>234</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>206</x>
+     <y>37</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_3</sender>
+   <signal>clicked()</signal>
+   <receiver>TempQuastion1</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>276</x>
+     <y>188</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>35</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>SendCheckspushButton_3</sender>
+   <signal>clicked()</signal>
+   <receiver>groupBox_2</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>158</x>
+     <y>243</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>88</x>
+     <y>219</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

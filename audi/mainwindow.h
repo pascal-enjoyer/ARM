@@ -24,11 +24,12 @@ public:
 private slots:
     void on_pushButton_clicked();
     void updateTime();
-
+    void updateGlTime();
     void on_pushButton_2_clicked();
 
 private:
     Ui::MainWindow *ui;
     QTimer *tmr;
+    QTimer *tmr2;
 };
 #endif // MAINWINDOW_H
