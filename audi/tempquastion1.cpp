@@ -54,10 +54,6 @@ void TempQuastion1::on_SendOtherpushButton_4_clicked()
         out << Auth::UserLogon << ":" << b << "\n";
         written_requests.close();
     }
-    else
-    {
-        QMessageBox::critical(this, "Ошибка", "Не удалось открыть файл для записи");
-    }
     QMessageBox::information(this, "Это окно можно закрыть", "Сообщение о проблеме отправлено, можете продолжать работать");
     yes=1;
     close();
@@ -96,10 +92,6 @@ void TempQuastion1::on_SendCheckspushButton_3_clicked()
         QTextStream out(&requests);
         out << Auth::UserLogon << ":" << b << "\n";
         requests.close();
-    }
-    else
-    {
-        QMessageBox::critical(this, "Ошибка", "Не удалось открыть файл для записи");
     }
 }
 

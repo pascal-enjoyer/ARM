@@ -10,8 +10,5 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     Auth w;
     w.show();
-    QTimer::singleShot(5000, &w, SLOT(updateTime()));
-    QTimer::singleShot(1000, &w, SLOT(updateGlTime()));
-    QTimer::singleShot(1000, &w, SLOT(updateCaseTime()));
     return a.exec();
 }

@@ -270,11 +270,6 @@ void MainWindow::on_action_triggered()
         }
         requests2.close();
     }
-    else
-    {
-        QMessageBox::critical(this, "Ошибка", "Не удалось открыть файл для чтения");
-    }
-
     if (written_requests2.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         QTextStream in(&written_requests2);
@@ -293,11 +288,6 @@ void MainWindow::on_action_triggered()
         }
         written_requests2.close();
     }
-    else
-    {
-        QMessageBox::critical(this, "Ошибка", "Не удалось открыть файл для чтения");
-    }
-
 }
 
 
