@@ -15,8 +15,6 @@ class Auth : public QDialog
 
 public:
     static QString UserLogon;
-
-    QString loginPassword[10]{"admin", "00000", "alexey", "11111", "david", "22222", "vlad", "33333", "kirill", "44444"};
     explicit Auth(QWidget *parent = nullptr);
     ~Auth();
 

@@ -21,8 +21,14 @@ Auth::~Auth()
 QString Auth::UserLogon;
 void Auth::on_pushButton_clicked()
 {
+    if (!AuthFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QMessageBox::critical(this, "Ошибка", "Не удалось открыть файл auth.txt");
+        return;
+    }
+
     QString username = ui->lineEdit->text();
     QString password = ui->lineEdit_2->text();
+
     QTextStream in(&AuthFile);
     while (!in.atEnd()) {
         QString line = in.readLine();

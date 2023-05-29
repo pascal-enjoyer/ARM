@@ -4,6 +4,9 @@
 #include <QMessageBox>
 #include <QApplication>
 #include "auth.h"
+#include <QTime>
+#include <QDate>
+#include <QTextStream>
 QString a;
 QFile requests("C:/Qt/Qt5.12.12/audi/requests/requests.txt");
 QFile written_requests("C:/Qt/Qt5.12.12/audi/requests/written_requests.txt");
@@ -51,7 +54,7 @@ void TempQuastion1::on_SendOtherpushButton_4_clicked()
     if (written_requests.open(QIODevice::Append | QIODevice::Text))
     {
         QTextStream out(&written_requests);
-        out << Auth::UserLogon << ":" << b << "\n";
+        out << Auth::UserLogon << ";" + QTime::currentTime().toString(Qt::SystemLocaleShortDate) + ";" + QDate::currentDate().toString(Qt::SystemLocaleShortDate) +";" + b << "\n";
         written_requests.close();
     }
     QMessageBox::information(this, "Это окно можно закрыть", "Сообщение о проблеме отправлено, можете продолжать работать");
@@ -90,7 +93,7 @@ void TempQuastion1::on_SendCheckspushButton_3_clicked()
     if (requests.open(QIODevice::Append | QIODevice::Text))
     {
         QTextStream out(&requests);
-        out << Auth::UserLogon << ":" << b << "\n";
+        out << Auth::UserLogon << ";" << QTime::currentTime().toString(Qt::SystemLocaleShortDate) + ";" + QDate::currentDate().toString(Qt::SystemLocaleShortDate) +";" + b << "\n";
         requests.close();
     }
 }
