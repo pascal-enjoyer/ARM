@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>560</width>
-    <height>330</height>
+    <width>540</width>
+    <height>260</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,10 +26,25 @@
       </sizepolicy>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="troubles_yes_or_no">
       <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="1" colspan="3">
+        <widget class="QLabel" name="FirstQuastionlabel">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>У вас были проблемы при выполнении заказа?</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
        <item row="2" column="3">
         <widget class="QPushButton" name="No1pushButton_2">
          <property name="font">
@@ -48,22 +63,7 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="0" colspan="4">
-        <widget class="QLabel" name="FirstQuastionlabel">
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>У вас были проблемы при выполнении заказа?</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
+       <item row="2" column="2">
         <widget class="QPushButton" name="pushButton_2">
          <property name="font">
           <font>
@@ -79,59 +79,25 @@
         </widget>
        </item>
        <item row="2" column="1">
-        <spacer name="horizontalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="chose_problem">
-      <layout class="QGridLayout" name="gridLayout_5">
-       <item row="5" column="0" colspan="3">
-        <widget class="QCheckBox" name="bankomatcheckBox_4">
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Неисправность банкомата</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="0" colspan="3">
-        <widget class="QCheckBox" name="CarcheckBox">
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Сломалась машина</string>
-         </property>
-        </widget>
-       </item>
-       <item row="8" column="0">
-        <widget class="QPushButton" name="SendCheckspushButton_3">
+        <widget class="QPushButton" name="pushButton_6">
          <property name="font">
           <font>
            <pointsize>10</pointsize>
           </font>
          </property>
          <property name="text">
-          <string>Отправить</string>
+          <string>Назад</string>
+         </property>
+         <property name="autoDefault">
+          <bool>false</bool>
          </property>
         </widget>
        </item>
-       <item row="0" column="0" colspan="3">
+      </layout>
+     </widget>
+     <widget class="QWidget" name="chose_problem">
+      <layout class="QGridLayout" name="gridLayout_5">
+       <item row="0" column="1" colspan="3">
         <widget class="QLabel" name="ChooseCheckBoxlabel_2">
          <property name="font">
           <font>
@@ -143,7 +109,100 @@
          </property>
         </widget>
        </item>
-       <item row="7" column="0">
+       <item row="6" column="2">
+        <widget class="QPushButton" name="SendCheckspushButton_3">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Отправить</string>
+         </property>
+         <property name="autoDefault">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="3">
+        <widget class="QPushButton" name="pushButton">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Другое</string>
+         </property>
+         <property name="autoDefault">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1" colspan="3">
+        <widget class="QCheckBox" name="CaputcheckBox_3">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Изменение маршрута</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1" colspan="3">
+        <widget class="QCheckBox" name="CarcheckBox">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Неисправность транспорта</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1" colspan="3">
+        <widget class="QCheckBox" name="NotMoneycheckBox_2">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Получены не все деньги</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1" colspan="3">
+        <widget class="QCheckBox" name="bankomatcheckBox_4">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Неисправность банкомата</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QPushButton" name="pushButton_5">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Назад</string>
+         </property>
+         <property name="autoDefault">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
         <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -156,60 +215,14 @@
          </property>
         </spacer>
        </item>
-       <item row="8" column="2">
-        <widget class="QPushButton" name="pushButton">
-         <property name="font">
-          <font>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Другое</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0" rowspan="2" colspan="3">
-        <widget class="QCheckBox" name="NotMoneycheckBox_2">
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Получены не все деньги</string>
-         </property>
-        </widget>
-       </item>
-       <item row="8" column="1">
-        <spacer name="horizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="3" column="0" colspan="3">
-        <widget class="QCheckBox" name="CaputcheckBox_3">
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Изменение маршрута</string>
-         </property>
-        </widget>
-       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="describe_problem">
       <layout class="QGridLayout" name="gridLayout_4">
-       <item row="2" column="0" colspan="2">
+       <item row="1" column="0" colspan="3">
+        <widget class="QTextEdit" name="textEdit"/>
+       </item>
+       <item row="2" column="1" colspan="2">
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -222,10 +235,34 @@
          </property>
         </spacer>
        </item>
-       <item row="1" column="0" colspan="2">
-        <widget class="QTextEdit" name="textEdit"/>
+       <item row="0" column="0" colspan="3">
+        <widget class="QLabel" name="label">
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Опишите проблему:</string>
+         </property>
+        </widget>
        </item>
-       <item row="3" column="0" colspan="2">
+       <item row="3" column="0">
+        <widget class="QPushButton" name="pushButton_4">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Назад</string>
+         </property>
+         <property name="autoDefault">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1" colspan="2">
         <widget class="QPushButton" name="SendOtherpushButton_4">
          <property name="enabled">
           <bool>true</bool>
@@ -238,17 +275,8 @@
          <property name="text">
           <string>Отправить</string>
          </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="label">
-         <property name="font">
-          <font>
-           <pointsize>11</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Опишите проблему:</string>
+         <property name="autoDefault">
+          <bool>false</bool>
          </property>
         </widget>
        </item>
@@ -282,7 +310,7 @@
           <string>продолжить</string>
          </property>
          <property name="autoDefault">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
         </widget>
        </item>
@@ -301,8 +329,8 @@
    <slot>show()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>337</x>
-     <y>293</y>
+     <x>541</x>
+     <y>311</y>
     </hint>
     <hint type="destinationlabel">
      <x>52</x>
@@ -317,8 +345,8 @@
    <slot>show()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>337</x>
-     <y>288</y>
+     <x>541</x>
+     <y>311</y>
     </hint>
     <hint type="destinationlabel">
      <x>375</x>
@@ -333,8 +361,8 @@
    <slot>show()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>338</x>
-     <y>292</y>
+     <x>541</x>
+     <y>311</y>
     </hint>
     <hint type="destinationlabel">
      <x>134</x>
@@ -349,8 +377,8 @@
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>54</x>
-     <y>288</y>
+     <x>72</x>
+     <y>29</y>
     </hint>
     <hint type="destinationlabel">
      <x>35</x>

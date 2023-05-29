@@ -25,10 +25,8 @@ void Auth::on_pushButton_clicked()
         QMessageBox::critical(this, "Ошибка", "Не удалось открыть файл auth.txt");
         return;
     }
-
     QString username = ui->lineEdit->text();
     QString password = ui->lineEdit_2->text();
-
     QTextStream in(&AuthFile);
     while (!in.atEnd()) {
         QString line = in.readLine();

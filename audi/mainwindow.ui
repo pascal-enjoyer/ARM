@@ -15,10 +15,10 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_2">
-    <item row="2" column="0">
+    <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>3</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="start_groupbox">
        <property name="sizePolicy">
@@ -358,16 +358,51 @@
        </layout>
       </widget>
       <widget class="QWidget" name="requests">
-       <widget class="QListWidget" name="listWidget">
+       <widget class="QListWidget" name="requests_list">
         <property name="geometry">
          <rect>
-          <x>90</x>
-          <y>40</y>
-          <width>256</width>
-          <height>192</height>
+          <x>5</x>
+          <y>5</y>
+          <width>540</width>
+          <height>260</height>
          </rect>
         </property>
+        <property name="uniformItemSizes">
+         <bool>false</bool>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
        </widget>
+       <widget class="QListWidget" name="other_requests_list">
+        <property name="geometry">
+         <rect>
+          <x>5</x>
+          <y>5</y>
+          <width>540</width>
+          <height>260</height>
+         </rect>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_3">
+        <property name="geometry">
+         <rect>
+          <x>5</x>
+          <y>270</y>
+          <width>540</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Другие запросы</string>
+        </property>
+       </widget>
+       <zorder>other_requests_list</zorder>
+       <zorder>requests_list</zorder>
+       <zorder>pushButton_3</zorder>
       </widget>
       <widget class="QWidget" name="statistic">
        <widget class="QLabel" name="UserInfo">
@@ -488,5 +523,22 @@
  <resources>
   <include location="res.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton_3</sender>
+   <signal>clicked()</signal>
+   <receiver>requests_list</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>154</x>
+     <y>325</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>163</x>
+     <y>234</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

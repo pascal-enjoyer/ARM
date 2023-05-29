@@ -2,6 +2,8 @@
 #define TEMPQUASTION1_H
 
 #include <QDialog>
+#include <QFile>
+#include <QTextStream>
 
 namespace Ui {
 class TempQuastion1;
@@ -28,6 +30,12 @@ private slots:
     void on_SendCheckspushButton_3_clicked();
 
     void on_pushButton_3_clicked();
+
+    void on_pushButton_4_clicked();
+
+    void on_pushButton_6_clicked();
+
+    void on_pushButton_5_clicked();
 
 private:
     Ui::TempQuastion1 *ui;

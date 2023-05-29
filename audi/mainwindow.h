@@ -39,6 +39,8 @@ private slots:
 
     void on_action_triggered();
 
+    void on_pushButton_3_clicked();
+
 private:
     Ui::MainWindow *ui;
     QTimer *tmr;

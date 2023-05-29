@@ -9,6 +9,8 @@
 Case c;
 int count_of_hours;
 int count_of_hours_1case;
+QFile written_requests2("C:/Qt/Qt5.12.12/audi/requests/written_requests.txt");
+QFile requests2("C:/Qt/Qt5.12.12/audi/requests/requests.txt");
 QFile userdata("C:/Qt/Qt5.12.12/audi/userdata/userdata.txt");
 QFile file("C:/Qt/Qt5.12.12/audi/worktime/worktime.txt");
 
@@ -20,12 +22,43 @@ void MainWindow::RefreshTime() {
     ui->time_label->setText("сейчас " + QTime::currentTime().toString(Qt::SystemLocaleShortDate));
     ui->date_label->setText("сегодня " + QDate::currentDate().toString(Qt::SystemLocaleShortDate));
 }
+QString formatMinutes(int minutes)
+{
+    int lastDigit = minutes % 10;
+    int penultimateDigit = (minutes / 10) % 10;
 
+    if (penultimateDigit == 1)
+        return QString::number(minutes) + " минут.";
+
+    if (lastDigit == 1)
+        return QString::number(minutes) + " минута.";
+    else if (lastDigit >= 2 && lastDigit <= 4)
+        return QString::number(minutes) + " минуты.";
+    else
+        return QString::number(minutes) + " минут.";
+}
+QString formatOrders(int count)
+{
+    int lastDigit = count % 10;
+    int penultimateDigit = (count / 10) % 10;
+
+    if (penultimateDigit == 1)
+        return QString::number(count) + " заказов.";
+
+    if (lastDigit == 1)
+        return QString::number(count) + " заказ.";
+    else if (lastDigit >= 2 && lastDigit <= 4)
+        return QString::number(count) + " заказа.";
+    else
+        return QString::number(count) + " заказов.";
+}
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->other_requests_list->hide();
+
 
     this->setWindowTitle("Инкассатор-про");
     ui->menuBar->hide();
@@ -46,14 +79,14 @@ MainWindow::MainWindow(QWidget *parent)
     connect(tmr3, SIGNAL(timeout()), this, SLOT(updateCaseTime()));
 
     RefreshTime();
-    ui->CountOfCompleteLabel->setText(QString::number(c.count_of_complete) + " заказов.");
+    ui->CountOfCompleteLabel->setText(formatOrders(c.count_of_complete));
     c.GenerateMoney();
     c.GenerateTime();
     c.GeneratePlace();
     c.Number = 1;
     ui->CaseNumber1->setText(QString::number(c.Number));
     ui->TimeLabelDyn->setText(c.money);
-    ui->MoneyLabelDyn->setText(QString::number(c.time_to_take) + " минут.");
+    ui->MoneyLabelDyn->setText(formatMinutes(c.time_to_take));
     ui->PlaceLabelDyn->setText(c.place);
 
 }
@@ -79,11 +112,12 @@ void MainWindow::updateCaseTime() {
     }
     else {
         c.time_to_take--;
-        ui->MoneyLabelDyn->setText(QString::number(c.time_to_take)+ " минут.");
+        ui->MoneyLabelDyn->setText(formatMinutes(c.time_to_take));
     }
 }
 void MainWindow::worktime() {
     count_of_hours++;
+    count_of_hours_1case++;
 }
 void MainWindow::updateTime() {
     ui->time_label->setText("сейчас " + QTime::currentTime().toString(Qt::SystemLocaleShortDate));
@@ -127,6 +161,7 @@ QString getImagePathByLogin(const QString& login)
 
     return imagePath;
 }
+
 void MainWindow::on_pushButton_2_clicked()
 {
     TempQuastion1 b;
@@ -136,23 +171,22 @@ void MainWindow::on_pushButton_2_clicked()
         c.count_of_complete -= 1;
         if (c.count_of_complete == 0) {
             ui->stackedWidget->setCurrentIndex(2);
-            ui->AllTimeEndLabel->setText("Вы выполнили все заказы.\nЗа " + QString::number(count_of_hours) + " часа вы выполнили " + QString::number(v) + " заказов.");
+            ui->AllTimeEndLabel->setText("Вы выполнили все заказы.\nЗа " + formatMinutes(count_of_hours) + formatOrders(v));
         }
         else {
             tmr3->stop();
-            count_of_hours_1case = count_of_hours;
             c.GenerateMoney();
             c.GeneratePlace();
             c.GenerateTime();
-            ui->case_list->addItem("№" + QString::number(c.Number) + " | " + c.money + " | Выполнено за " + QString::number(count_of_hours_1case) + " минут | " + c.place);
+            ui->case_list->addItem("№" + QString::number(c.Number) + " | " + c.money + ". | Выполнено за " + formatMinutes(count_of_hours_1case) + " | " + c.place + ".");
+            count_of_hours_1case = 0;
             ui->CaseNumber1->setText(QString::number(c.CaseNumber()));
             ui->TimeLabelDyn->setText(c.money);
-            ui->MoneyLabelDyn->setText(QString::number(c.time_to_take) + " минут.");
+            ui->MoneyLabelDyn->setText(formatMinutes(c.time_to_take));
             ui->PlaceLabelDyn->setText(c.place);
-            ui->CountOfCompleteLabel->setText(QString::number(c.count_of_complete) + " заказов.");
+            ui->CountOfCompleteLabel->setText(formatOrders(c.count_of_complete));
             ui->CaseStartButton->setEnabled(true);
             ui->pushButton_2->setDisabled(true);
-            count_of_hours_1case = 0;
 
         }
     }
@@ -216,6 +250,66 @@ void MainWindow::on_action_3_triggered()
 void MainWindow::on_action_triggered()
 {
     ui->stackedWidget->setCurrentIndex(3);
+    ui->requests_list->clear();
+    ui->other_requests_list->clear();
+    if (requests2.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        QTextStream in(&requests2);
+        while (!in.atEnd())
+        {
+            QString line = in.readLine();
+            QStringList parts = line.split(":");
+            if (parts.size() == 2)
+            {
+                QString login = parts[0];
+                QString problems = parts[1];
+                if (Auth::UserLogon == login) {
+                    ui->requests_list->addItem(problems);
+                }
+            }
+        }
+        requests2.close();
+    }
+    else
+    {
+        QMessageBox::critical(this, "Ошибка", "Не удалось открыть файл для чтения");
+    }
 
+    if (written_requests2.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        QTextStream in(&written_requests2);
+        while (!in.atEnd())
+        {
+            QString line = in.readLine();
+            QStringList parts = line.split(":");
+            if (parts.size() == 2)
+            {
+                QString login = parts[0];
+                QString problems = parts[1];
+                if (Auth::UserLogon == login) {
+                    ui->other_requests_list->addItem(problems);
+                }
+            }
+        }
+        written_requests2.close();
+    }
+    else
+    {
+        QMessageBox::critical(this, "Ошибка", "Не удалось открыть файл для чтения");
+    }
+
+}
+
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    if (ui->other_requests_list->isHidden()) {
+        ui->requests_list->hide();
+        ui->other_requests_list->show();
+    }
+    else if (ui->requests_list->isHidden()) {
+        ui->requests_list->show();
+        ui->other_requests_list->hide();
+    }
 }
 
