@@ -10,12 +10,8 @@ TempQuastion1::TempQuastion1(QWidget *parent) :
 {
 
     ui->setupUi(this);
-
-    ui->checkgroupBox_2->hide();
-    ui->textEdit->hide();
-    ui->SendOtherpushButton_4->hide();
-    ui->label->hide();
-    ui->groupBox_3->hide();
+    ui->stackedWidget2->setCurrentIndex(0);
+    this->setWindowTitle("Окно поддержки");
 }
 
 TempQuastion1::~TempQuastion1()
@@ -25,13 +21,13 @@ TempQuastion1::~TempQuastion1()
 
 void TempQuastion1::on_pushButton_clicked()
 {
-
+    ui->stackedWidget2->setCurrentIndex(2);
 }
 
 
 void TempQuastion1::on_pushButton_2_clicked()
 {
-
+    ui->stackedWidget2->setCurrentIndex(1);
 }
 
 void TempQuastion1::on_No1pushButton_2_clicked()
@@ -52,6 +48,7 @@ void TempQuastion1::on_SendOtherpushButton_4_clicked()
 
 void TempQuastion1::on_SendCheckspushButton_3_clicked()
 {
+    a = "";
     if (ui->CarcheckBox->isChecked())
         a+="Механики вызваны.\n";
     if (ui->NotMoneycheckBox_2->isChecked())
@@ -59,11 +56,9 @@ void TempQuastion1::on_SendCheckspushButton_3_clicked()
     if (ui->bankomatcheckBox_4->isChecked())
         a+="Сервис-инженеры по обслуживанию банкоматов\nвызваны.";
     if (ui->CaputcheckBox_3->isChecked())
-        a+="Ответственные за маршрут\nсотрудники будут опевещены.\nПри возможности продолжайте работать.";
-    ui->label_2->setText(a);
-    ui->groupBox->hide();
-    ui->groupBox_3->show();
-    ui->pushButton->hide();
+        a+="Ответственные за маршрут\nсотрудники будут опевещены.\n";
+    ui->label_2->setText(a + "При возможности продолжайте работать.");
+    ui->stackedWidget2->setCurrentIndex(3);
 }
 
 

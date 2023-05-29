@@ -1,0 +1,5 @@
+admin:00000
+david:33333
+vlad:11111
+kirill:22222
+danil:44444

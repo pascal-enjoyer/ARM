@@ -25,11 +25,24 @@ private slots:
     void on_pushButton_clicked();
     void updateTime();
     void updateGlTime();
+    void updateCaseTime();
+    void worktime();
     void on_pushButton_2_clicked();
+    void UserName();
+    void on_CaseStartButton_clicked();
+
+    void on_EndDayButton_3_clicked();
+
+    void on_action_4_triggered();
+
+    void on_action_3_triggered();
+
+    void on_action_triggered();
 
 private:
     Ui::MainWindow *ui;
     QTimer *tmr;
     QTimer *tmr2;
+    QTimer *tmr3;
 };
 #endif // MAINWINDOW_H
