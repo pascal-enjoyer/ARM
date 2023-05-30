@@ -20,6 +20,7 @@ QFile written_requests2("C:/Qt/Qt5.12.12/audi/requests/written_requests.txt");
 QFile requests2("C:/Qt/Qt5.12.12/audi/requests/requests.txt");
 QFile userdata("C:/Qt/Qt5.12.12/audi/userdata/userdata.txt");
 QFile file("C:/Qt/Qt5.12.12/audi/worktime/worktime.txt");
+QFile file3("C:/Qt/Qt5.12.12/audi/worktime/worktime_out.txt");
 
 QString full_info_of_user;
 
@@ -345,6 +346,12 @@ void MainWindow::on_CaseStartButton_clicked()
 
 void MainWindow::on_EndDayButton_3_clicked()
 {
+    if (file3.open(QIODevice::Append | QIODevice::Text)) {
+        QTextStream out(&file3);
+        QString currentDateTime = QDateTime::currentDateTime().toString(Qt::ISODate);
+        out << Auth::UserLogon << " " << currentDateTime << endl;
+        file3.close();
+    }
     close();
     delete tmr2;
     delete tmr3;
