@@ -17,6 +17,7 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
+
     void CaseUpdate();
     void RefreshTime();
     ~MainWindow();
@@ -46,5 +47,6 @@ private:
     QTimer *tmr;
     QTimer *tmr2;
     QTimer *tmr3;
+
 };
 #endif // MAINWINDOW_H

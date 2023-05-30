@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>4</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="start_groupbox">
        <property name="sizePolicy">
@@ -328,22 +328,10 @@
       </widget>
       <widget class="QWidget" name="final_group_box">
        <layout class="QGridLayout" name="gridLayout_5">
-        <item row="1" column="0">
-         <widget class="QLabel" name="AllTimeEndLabel">
-          <property name="font">
-           <font>
-            <pointsize>22</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>TextLabel</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-          </property>
-         </widget>
+        <item row="0" column="0">
+         <widget class="QGraphicsView" name="graphicsView"/>
         </item>
-        <item row="2" column="0">
+        <item row="1" column="0">
          <widget class="QPushButton" name="EndDayButton_3">
           <property name="font">
            <font>

@@ -6,9 +6,16 @@
 #include <QFile>
 #include "auth.h"
 #include <QDir>
+#include <QPointF>
+#include <QGraphicsScene>
+#include <QGraphicsView>
+#include <QVector>
+#include <QGraphicsEllipseItem>
 Case c;
 int count_of_hours;
 int count_of_hours_1case;
+QVector<double> time_of_all;
+QVector<double> cases; // Значения кейсов
 QFile written_requests2("C:/Qt/Qt5.12.12/audi/requests/written_requests.txt");
 QFile requests2("C:/Qt/Qt5.12.12/audi/requests/requests.txt");
 QFile userdata("C:/Qt/Qt5.12.12/audi/userdata/userdata.txt");
@@ -90,6 +97,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->other_requests_list->hide();
 
 
+
+
+
     this->setWindowTitle("Инкассатор-про");
     ui->menuBar->hide();
     ui->pushButton_2->setDisabled(true);
@@ -119,6 +129,78 @@ MainWindow::MainWindow(QWidget *parent)
     ui->MoneyLabelDyn->setText(formatMinutes(c.time_to_take));
     ui->PlaceLabelDyn->setText(c.place);
 }
+
+
+
+
+
+
+void drawGraph(QGraphicsView* graphicsView, const QVector<double>& time, const QVector<double>& cases)
+{
+    QGraphicsScene* scene = new QGraphicsScene(graphicsView);
+    double minX = *std::min_element(cases.constBegin(), cases.constEnd());
+    double maxX = *std::max_element(cases.constBegin(), cases.constEnd());
+    double minY = *std::min_element(time.constBegin(), time.constEnd());
+    double maxY = *std::max_element(time.constBegin(), time.constEnd());
+    int graphWidth = graphicsView->viewport()->width();
+    int graphHeight = graphicsView->viewport()->height();
+
+    double scaleX = graphWidth / (maxX - minX);
+    double scaleY = graphHeight / (maxY - minY);
+
+    // Draw x-axis
+    double xAxisLength = graphWidth;
+    QGraphicsLineItem* xAxis = scene->addLine(0, graphHeight, xAxisLength, graphHeight, QPen(Qt::black));
+    xAxis->setFlag(QGraphicsItem::ItemIsSelectable, false);
+
+    // Draw y-axis
+    double yAxisLength = graphHeight;
+    QGraphicsLineItem* yAxis = scene->addLine(0, 0, 0, yAxisLength, QPen(Qt::black));
+    yAxis->setFlag(QGraphicsItem::ItemIsSelectable, false);
+
+    // Add labels to x-axis
+    for (int i = 0; i < cases.size(); ++i)
+    {
+        double x = (cases[i] - minX) * scaleX;
+
+        QGraphicsSimpleTextItem* label = scene->addSimpleText(QString::number(cases[i]));
+        label->setPos(x - label->boundingRect().width() / 2, graphHeight + 5);
+    }
+
+    // Add labels to y-axis
+    for (int i = 0; i < time.size(); ++i)
+    {
+        double y = graphHeight - (time[i] - minY) * scaleY;
+
+        QGraphicsSimpleTextItem* label = scene->addSimpleText(QString::number(time[i]));
+        label->setPos(-label->boundingRect().width() - 5, y - label->boundingRect().height() / 2);
+    }
+
+    for (int i = 0; i < cases.size(); ++i)
+    {
+        double x = (cases[i] - minX) * scaleX;
+        double y = graphHeight - (time[i] - minY) * scaleY;
+
+        QGraphicsEllipseItem* pointItem = scene->addEllipse(x - 6, y - 6, 12, 12, QPen(Qt::NoPen), QBrush(Qt::blue));
+        pointItem->setFlag(QGraphicsItem::ItemIsMovable, false);  // Disable drag and drop
+    }
+
+    for (int i = 0; i < cases.size() - 1; ++i)
+    {
+        double x1 = (cases[i] - minX) * scaleX;
+        double y1 = graphHeight - (time[i] - minY) * scaleY;
+        double x2 = (cases[i + 1] - minX) * scaleX;
+        double y2 = graphHeight - (time[i + 1] - minY) * scaleY;
+
+        QGraphicsLineItem* lineItem = scene->addLine(x1, y1, x2, y2, QPen(Qt::red, 3));
+        lineItem->setFlag(QGraphicsItem::ItemIsSelectable, false);
+    }
+
+    graphicsView->setScene(scene);
+}
+
+
+
 
 MainWindow::~MainWindow()
 {
@@ -166,9 +248,8 @@ void MainWindow::on_pushButton_clicked()
     ui->menuBar->show();
     if (file.open(QIODevice::Append | QIODevice::Text)) {
         QTextStream out(&file);
-        QDateTime currentDateTime = QDateTime::currentDateTime();
-        QString dateTimeString = currentDateTime.toString(Qt::ISODate);
-        out << Auth::UserLogon << " " << dateTimeString << endl;
+        QString currentDateTime = QDateTime::currentDateTime().toString(Qt::ISODate);
+        out << Auth::UserLogon << " " << currentDateTime << endl;
         file.close();
     }
     QMessageBox::information(this, "Это окно можно закрыть", "Вы начали работать в " + QTime::currentTime().toString(Qt::SystemLocaleShortDate) + ", " + QDate::currentDate().toString(Qt::SystemLocaleShortDate));
@@ -204,7 +285,10 @@ void MainWindow::on_pushButton_2_clicked()
         if (c.count_of_complete <= 0) {
             tmr3->stop();
             ui->stackedWidget->setCurrentIndex(2);
-            ui->AllTimeEndLabel->setText("Вы выполнили все заказы.\nЗа " + formatMinutes1(count_of_hours) + " " + "вы выполнили " + formatOrders1(v) + ".");
+            time_of_all << count_of_hours_1case;
+            cases << c.Number;
+            drawGraph(ui->graphicsView, time_of_all, cases);
+
 
         }
         else {
@@ -212,7 +296,8 @@ void MainWindow::on_pushButton_2_clicked()
             c.GenerateMoney();
             c.GeneratePlace();
             c.GenerateTime();
-
+            time_of_all << count_of_hours_1case;
+            cases << c.Number;
             count_of_hours_1case = 0;
             ui->CaseNumber1->setText(QString::number(c.CaseNumber()));
             ui->TimeLabelDyn->setText(c.money);
@@ -270,6 +355,7 @@ void MainWindow::on_action_4_triggered()
 {
     if (c.count_of_complete <= 0) {
         ui->stackedWidget->setCurrentIndex(2);
+        drawGraph(ui->graphicsView, time_of_all, cases);
     }
     else ui->stackedWidget->setCurrentIndex(1);
 }
