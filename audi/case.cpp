@@ -3,9 +3,9 @@
 Case::Case(QObject *parent) : QObject(parent)
 {
 srand(time(0));
-int a =5;
-//while (a <= 8 or a >= 11)
-//    a = rand() % 12 + 6;
+int a =1;
+while (a <= 8 or a >= 11)
+    a = rand() % 12 + 6;
 count_of_complete = a;
 }
 void Case::GenerateTime() {
