@@ -34,7 +34,7 @@ gh repo clone pascal-enjoyer/ARM/kommivoyajer/
 Рис. 2 - Визуализация решения задачи с 5 вершинами.
 <img src="./img/KOM4.png">
 Рис. 3 - Визуализация решения с 4 вершинами.
-<img src="./img/KOM1.jpg">
+<img src="./img/KOM1.JPG">
 Рис. 4 - Диаграмма классов.
 
 ## Исходный код
