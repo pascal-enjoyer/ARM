@@ -9,12 +9,6 @@ struct Vertex {
     int y;
 };
 
-struct Edge {
-    int from;
-    int to;
-    QGraphicsLineItem* lineItem;
-};
-
 class GraphWidget : public QGraphicsView
 {
     Q_OBJECT
@@ -24,14 +18,18 @@ public:
 
     void addVertex(int x, int y);
     void removeVertex(int index);
-    void addEdge(int from, int to);
+    void addEdge(int from, int to, int weight);
     void removeEdge(int from, int to);
     void setEdgeWeight(int from, int to, int weight);
     void setAdjacencyMatrix(const QVector<QVector<int>> &matrix);
-
     void breadthFirstSearch(int startVertex);
     void depthFirstSearch(int startVertex);
     void dijkstra(int startVertex, int endVertex);
+
+protected:
+    void drawBackground(QPainter *painter, const QRectF &rect) override;
+    void wheelEvent(QWheelEvent *event) override;
+    void scaleView(qreal scaleFactor);
 
 signals:
     void vertexAdded(int index);
@@ -41,24 +39,18 @@ signals:
     void edgeWeightChanged(int from, int to, int weight);
     void adjacencyMatrixChanged(const QVector<QVector<int>> &matrix);
 
-protected:
-    void drawBackground(QPainter *painter, const QRectF &rect) override;
-    void wheelEvent(QWheelEvent *event) override;
-    void scaleView(qreal scaleFactor);
-
 private:
-    QList<Edge> edges;
+    void initializeGraph();
+    void clearVisited();
+    void clearTraversal();
+    void dfsRecursive(int vertex);
+
     QVector<Vertex> vertices;
     QVector<QVector<int>> adjacencyMatrix;
     QVector<QVector<int>> edgeWeights;
     QVector<bool> visited;
     QVector<int> bfsTraversal;
     QVector<int> dfsTraversal;
-
-    void initializeGraph();
-    void clearVisited();
-    void clearTraversal();
-    void dfsRecursive(int vertex);
 };
 
 #endif // GRAPHWIDGET_H

@@ -49,9 +49,9 @@ int main(int argc, char *argv[]) {
         // Prompt the user for the source and destination vertices for the edge
         int from = QInputDialog::getInt(nullptr, "Добавить ребро", "Из вершины:");
         int to = QInputDialog::getInt(nullptr, "Добавить ребро", "В вершину:");
-
+        int weight = QInputDialog::getInt(nullptr, "Добавить вес ребра", "Вес ");
         // Add the edge to the graph
-        graphWidget.addEdge(from, to);
+        graphWidget.addEdge(from, to, weight);
     });
 
     QObject::connect(&removeEdgeButton, &QPushButton::clicked, [&graphWidget]() {

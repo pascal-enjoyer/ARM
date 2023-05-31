@@ -36,7 +36,7 @@ void GraphWidget::addVertex(int x, int y) {
     QGraphicsEllipseItem *ellipseItem = scene()->addEllipse(x - 20, y - 20, 40, 40);
     QGraphicsTextItem *textItem = scene()->addText(QString::number(vertices.size() - 1), QFont("Arial", 12));
     textItem->setPos(x - 6, y - 12);
-
+    edgeWeights[vertices.size() - 1].resize(vertices.size());
     emit vertexAdded(vertices.size() - 1);
 }
 
@@ -63,12 +63,15 @@ void GraphWidget::removeVertex(int index) {
     emit vertexRemoved(index);
 }
 
-void GraphWidget::addEdge(int from, int to) {
+void GraphWidget::addEdge(int from, int to, int weight) {
     if (from < 0 || from >= vertices.size() || to < 0 || to >= vertices.size())
         return;
 
     adjacencyMatrix[from][to] = 1;
     adjacencyMatrix[to][from] = 1;
+
+    edgeWeights[from][to] = weight;
+    edgeWeights[to][from] = weight;
 
     // Update scene
     QGraphicsLineItem *lineItem = scene()->addLine(vertices[from].x, vertices[from].y, vertices[to].x, vertices[to].y);
@@ -222,6 +225,17 @@ void GraphWidget::drawBackground(QPainter *painter, const QRectF &rect) {
         for (int j = i + 1; j < vertices.size(); ++j) {
             if (adjacencyMatrix[i][j] == 1) {
                 painter->drawLine(vertices[i].x, vertices[i].y, vertices[j].x, vertices[j].y);
+            }
+        }
+    }
+    painter->setPen(Qt::black);
+    for (int i = 0; i < vertices.size(); ++i) {
+        for (int j = i + 1; j < vertices.size(); ++j) {
+            if (adjacencyMatrix[i][j] == 1) {
+                QPoint p1(vertices[i].x, vertices[i].y);
+                QPoint p2(vertices[j].x, vertices[j].y);
+                QPointF center = (p1 + p2) / 2.0;
+                painter->drawText(center, QString::number(edgeWeights[i][j]));
             }
         }
     }
