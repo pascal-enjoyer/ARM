@@ -74,24 +74,70 @@ std::pair<int, std::vector<int>> solveTravelingSalesmanProblem(const std::vector
 
 class GraphWidget2 : public QWidget {
 public:
-    GraphWidget2(QWidget* parent = nullptr) : QWidget(parent) {}
+    GraphWidget2(QWidget* parent = nullptr) : QWidget(parent) {
+        connect(addVertexButton, &QPushButton::clicked, this, &GraphWidget2::addVertex);
+        connect(removeVertexButton, &QPushButton::clicked, this, &GraphWidget2::removeVertex);
+        connect(addEdgeButton, &QPushButton::clicked, this, &GraphWidget2::addEdge);
+        connect(removeEdgeButton, &QPushButton::clicked, this, &GraphWidget2::removeEdge);
+    }
+
+    void addVertex() {
+        bool ok;
+        int vertexIndex = QInputDialog::getInt(this, tr("Add Vertex"), tr("Enter vertex index:"), 0, 0, INT_MAX, 1, &ok);
+        if (ok) {
+            int n = graph.size();
+            for (int i = 0; i < n; ++i) {
+                graph[i].push_back(0); // Добавляем нулевые веса для новой вершины
+            }
+            std::vector<int> newRow(n + 1, 0);
+            graph.push_back(newRow); // Добавляем новую строку в матрицу смежности
+            update();
+        }
+    }
+
+    void removeVertex() {
+        bool ok;
+        int vertexIndex = QInputDialog::getInt(this, tr("Remove Vertex"), tr("Enter vertex index:"), 0, 0, INT_MAX, 1, &ok);
+        if (ok && vertexIndex >= 0 && vertexIndex < graph.size()) {
+            graph.erase(graph.begin() + vertexIndex); // Удаляем строку матрицы смежности
+            for (auto& row : graph) {
+                row.erase(row.begin() + vertexIndex); // Удаляем столбец матрицы смежности
+            }
+            update();
+        }
+    }
+
+    void addEdge() {
+        bool ok;
+        int vertexIndex1 = QInputDialog::getInt(this, tr("Add Edge"), tr("Enter first vertex index:"), 0, 0, INT_MAX, 1, &ok);
+        if (ok && vertexIndex1 >= 0 && vertexIndex1 < graph.size()) {
+            int vertexIndex2 = QInputDialog::getInt(this, tr("Add Edge"), tr("Enter second vertex index:"), 0, 0, INT_MAX, 1, &ok);
+            if (ok && vertexIndex2 >= 0 && vertexIndex2 < graph.size()) {
+                int weight = QInputDialog::getInt(this, tr("Add Edge"), tr("Enter edge weight:"), 0, 0, INT_MAX, 1, &ok);
+                if (ok) {
+                    graph[vertexIndex1][vertexIndex2] = weight;
+                    graph[vertexIndex2][vertexIndex1] = weight;
+                    update();
+                }
+            }
+        }
+    }
+
+    void removeEdge() {
+        bool ok;
+        int vertexIndex1 = QInputDialog::getInt(this, tr("Remove Edge"), tr("Enter first vertex index:"), 0, 0, INT_MAX, 1, &ok);
+        if (ok && vertexIndex1 >= 0 && vertexIndex1 < graph.size()) {
+            int vertexIndex2 = QInputDialog::getInt(this, tr("Remove Edge"), tr("Enter second vertex index:"), 0, 0, INT_MAX, 1, &ok);
+            if (ok && vertexIndex2 >= 0 && vertexIndex2 < graph.size()) {
+                graph[vertexIndex1][vertexIndex2] = 0;
+                graph[vertexIndex2][vertexIndex1] = 0;
+                update();
+            }
+        }
+    }
 
     void paintEvent(QPaintEvent* event) override {
         Q_UNUSED(event);
-
-        // Пример графа с весами ребер
-        std::vector<std::vector<int>> graph = {
-            {0, 3, 6, 1, 6, 14},
-            {3, 0, 10, 34, 0, 1},
-            {6, 10, 0, 11, 3, 0},
-            {1, 34, 11, 0, 6, 4},
-            {6, 0, 3, 6, 0, 9},
-            {14, 1, 0, 4, 9, 0}
-        };
-
-        auto result = solveTravelingSalesmanProblem(graph);
-        int minDistance = result.first;
-        std::vector<int> minPath = result.second;
 
         QPainter painter(this);
         painter.setRenderHint(QPainter::Antialiasing);
@@ -149,27 +195,47 @@ public:
         QString pathText = "Min Path: ";
         for (int i = 0; i < int(minPath.size()); ++i) {
             pathText += QString::number(minPath[i]);
-            if (i < int(minPath.size()) - 1) {
+            if (i != int(minPath.size()) - 1) {
                 pathText += " -> ";
             }
         }
         painter.drawText(QRectF(50, 280, 300, 30), Qt::AlignLeft, pathText);
     }
+    QPushButton* addVertexButton = new QPushButton("Add Vertex");
+    QPushButton* removeVertexButton = new QPushButton("Remove Vertex");
+    QPushButton* addEdgeButton = new QPushButton("Add Edge");
+    QPushButton* removeEdgeButton = new QPushButton("Remove Edge");
+private:
+    std::vector<std::vector<int>> graph; // Матрица смежности
+    int minDistance; // Минимальное расстояние
+    std::vector<int> minPath; // Кратчайший путь
+
+    void update() {
+        std::pair<int, std::vector<int>> result = solveTravelingSalesmanProblem(graph);
+        minDistance = result.first;
+        minPath = result.second;
+
+        QWidget::update();
+    }
 };
 
-int main(int argc, char *argv[]) {
 
+int main(int argc, char** argv) {
     QApplication app(argc, argv);
 
-    GraphWidget2 graphWidget2;
-    QVBoxLayout mainLayout2;
-    mainLayout2.addWidget(&graphWidget2);
-    QWidget window2;
-    window2.setLayout(&mainLayout2);
-    window2.setWindowTitle("Traveling Salesman Problem");
-    window2.setFixedSize(600,550);
-    window2.show();
+    GraphWidget2 graphWidget;
+    graphWidget.setGeometry(100, 100, 600, 600);
+    graphWidget.show();
+
+    QHBoxLayout* layout = new QHBoxLayout;
+    layout->addWidget(graphWidget.addVertexButton);
+    layout->addWidget(graphWidget.removeVertexButton);
+    layout->addWidget(graphWidget.addEdgeButton);
+    layout->addWidget(graphWidget.removeEdgeButton);
+
+    QWidget widget;
+    widget.setLayout(layout);
+    widget.show();
 
     return app.exec();
 }
-
